@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/recipe?createDatabaseIfNotExist=true&reWriteBatchedInserts=true&zeroDateTimeBehavior=convertToNull
+    username: recipe
+    password: "9NFX6R^p*p36!)Hg"
+  jpa:
+    generate-ddl: true
+    hibernate.ddl-auto: update
+    properties:
+      order_updates: true
+      batch_versioned_data: true
+      jdbc:
+      batch_size: 1000
+      hibernate:
+        enable_lazy_load_no_trans: true
