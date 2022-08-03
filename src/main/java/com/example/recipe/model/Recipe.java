@@ -15,6 +15,11 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String title;
+
+    @Enumerated(EnumType.STRING)
+    private DishType dishType;
+
     private Integer servings;
 
     @Column(columnDefinition = "TEXT")

@@ -6,7 +6,7 @@ spring:
     password: "9NFX6R^p*p36!)Hg"
   jpa:
     generate-ddl: true
-    hibernate.ddl-auto: update
+    hibernate.ddl-auto: create
     properties:
       order_updates: true
       batch_versioned_data: true
