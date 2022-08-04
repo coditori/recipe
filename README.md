@@ -12,7 +12,7 @@ Here you have a crud operation over Recipe Api + a simple search query with DB s
 To access Swagger documentation open: http://localhost:8080/swagger-ui.html in your browser
 
 #### full-text search
-I've used MySql first but hda some issues with the full-text then I refactored to postgres, Here I used hibernate search + postgres full-text function but generally there are some other options at scale which are ordered by the best solutions:
+I've used MySql first but had some issues with the full-text then I refactored to postgres, Here I used hibernate search + postgres full-text function but generally there are some other options at scale which are ordered by the best solutions:
 1. ElasticSearch (best in our case)
 2. Apache Solr
 3. Full-Text at caching level (Eg: Redis)
