@@ -21,5 +21,7 @@ I've used MySql first but had some issues with the full-text then I refactored t
 6. Using SQL native queries inside repository
 
 #### How to run
+```
 docker build -t recipe .
 docker-compose up
+```
