@@ -1,10 +1,11 @@
 spring:
   datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/recipe?createDatabaseIfNotExist=true&reWriteBatchedInserts=true&zeroDateTimeBehavior=convertToNull
-    username: recipe
-    password: "9NFX6R^p*p36!)Hg"
+    url: jdbc:postgresql://localhost:5432/recipe?createDatabaseIfNotExist=true
+    username: postgres
+    password: local
+    driver-class-name: org.postgresql.Driver
   jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     generate-ddl: true
     hibernate.ddl-auto: update
     properties:
@@ -14,3 +15,6 @@ spring:
       batch_size: 1000
       hibernate:
         enable_lazy_load_no_trans: true
+        show_sql: true
+        format_sql: true
+        metadata_builder_contributor: com.example.recipe.config.SqlFunctionsRegistry
