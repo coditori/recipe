@@ -9,6 +9,7 @@ import com.example.recipe.repository.RecipeRepository;
 import com.example.recipe.search.SearchQuery;
 import com.example.recipe.search.SpecificationUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@AllArgsConstructor
 public class RecipeService {
 
     @Autowired

@@ -1,0 +1,12 @@
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  datasource:
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+  jpa:
+    generate-ddl: true
+    hibernate.ddl-auto: update
