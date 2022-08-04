@@ -6,11 +6,14 @@ import com.example.recipe.model.Ingredient;
 import com.example.recipe.model.Recipe;
 import com.example.recipe.repository.IngredientRepository;
 import com.example.recipe.repository.RecipeRepository;
+import com.example.recipe.search.SearchQuery;
+import com.example.recipe.search.SpecificationUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -28,21 +31,51 @@ public class RecipeService {
         return objectMapper.convertValue(recipeDto, Recipe.class);
     }
 
+    private void setRecipeForIngredients(Recipe recipeEntity) {
+        for (Ingredient ingredient : recipeEntity.getIngredients()) ingredient.setRecipe(recipeEntity);
+    }
+
+    private Recipe findRecipeOrElseThrow(Long recipeId) {
+        return recipeRepository.findById(recipeId).orElseThrow(() -> new EntityNotFoundException("Could not find recipe with id: " + recipeId));
+    }
+
     @Transactional
-    public Recipe createRecipe(RecipeDto recipeDto) {
+    public Recipe create(RecipeDto recipeDto) {
         Recipe recipeEntity = getRecipeByDto(recipeDto);
-        for (Ingredient ingredient : recipeEntity.getIngredients()) {
-            ingredient.setRecipe(recipeEntity);
-        }
+        setRecipeForIngredients(recipeEntity);
+
         return recipeRepository.save(recipeEntity);
     }
 
-    public Page<Recipe> getAllRecipes(int pageSize, int pageNumber) {
+    public Page<Recipe> getAll(int pageSize, int pageNumber) {
         return recipeRepository
                 .findAll(PageRequest.of(pageNumber, pageSize == 0 ? 10 : pageSize));
     }
 
-    public Recipe getRecipeById(Long recipeId) {
+    public Recipe getById(Long recipeId) {
         return recipeRepository.findById(recipeId).orElseThrow(() -> new EntityNotFoundException("Could not find recipe with id: " + recipeId));
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public Recipe updateById(Long recipeId, RecipeDto recipeDto) {
+        findRecipeOrElseThrow(recipeId);
+        Recipe recipeEntity = getRecipeByDto(recipeDto);
+        recipeEntity.setId(recipeId);
+        setRecipeForIngredients(recipeEntity);
+        ingredientRepository.deleteByRecipeId(recipeId);
+        return recipeRepository.save(recipeEntity);
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void deleteRecipe(Long recipeId) {
+        Recipe recipeEntity = findRecipeOrElseThrow(recipeId);
+        recipeRepository.delete(recipeEntity);
+    }
+
+    public Page<Recipe> searchRecipes(SearchQuery searchQuery) {
+        return recipeRepository.findAll(SpecificationUtil.bySearchQuery(searchQuery)
+                , PageRequest.of(searchQuery.getPageNumber()
+                        , searchQuery.getPageSize() == 0 ? 10 : searchQuery.getPageSize())
+        );
     }
 }
