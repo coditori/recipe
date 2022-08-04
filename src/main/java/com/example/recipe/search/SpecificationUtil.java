@@ -103,7 +103,6 @@ public class SpecificationUtil {
                                 , expression, criteriaBuilder.literal(searchFilter.getValue())), true));
                 break;
             default:
-                System.out.println("Predicate is not matched");
                 throw new IllegalArgumentException(searchFilter.getOperator() + " is not a valid predicate");
         }
 

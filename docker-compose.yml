@@ -6,7 +6,7 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - maria_db_recipe
+      - db
     deploy:
       replicas: 1
   db:

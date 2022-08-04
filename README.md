@@ -2,7 +2,7 @@
 Here you have a crud operation over Recipe Api + a simple search query with DB side native full-text functionality
 
 ### Technologies
-* Java17
+* Java 11
 * Spring Boot
 * Postgres DB
 * Gradle
@@ -20,3 +20,6 @@ I've used MySql first but hda some issues with the full-text then I refactored t
 5. Using SpringJPA find(modelName)by(fieldName)
 6. Using SQL native queries inside repository
 
+#### How to run
+# docker build -t recipe .
+# docker-compose up
