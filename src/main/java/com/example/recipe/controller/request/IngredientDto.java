@@ -1,4 +1,4 @@
-package com.example.recipe.model;
+package com.example.recipe.controller.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;

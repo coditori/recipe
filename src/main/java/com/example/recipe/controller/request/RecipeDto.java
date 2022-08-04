@@ -1,7 +1,6 @@
-package com.example.recipe.controller;
+package com.example.recipe.controller.request;
 
 import com.example.recipe.model.DishType;
-import com.example.recipe.model.IngredientDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;

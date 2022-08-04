@@ -1,9 +1,9 @@
 package com.example.recipe.controller;
 
+import com.example.recipe.controller.request.RecipeDto;
 import com.example.recipe.model.Recipe;
 import com.example.recipe.service.RecipeService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
